@@ -52,19 +52,90 @@ def toTime(x):
         min2 = "0" + min2
     return hr2 + ":" + min2 + ":" + sec2 + "." + mil2
 
-def totalizer(x):
+def totalizer(x, s):
     x_score = list(())
-    for i in range(size):
+    for i in range(s):
         x_score.append(toScore(x[i]))
     total = 0
-    for i in range(size):
+    for i in range(s):
         total = total + x_score[i]
     return toTime(total)
+
+def getTrack(track):
+    if track.isnumeric():
+        return str(track)
+    if track == "lc":
+        track = 1
+    elif track == "mmm":
+        track = 2
+    elif track == "mg":
+        track = 3
+    elif track == "tf":
+        track = 4
+    elif track == "mc":
+        track = 5
+    elif track == "cm":
+        track = 6
+    elif track == "dks":
+        track = 7 
+    elif track == "wgm":
+        track = 8 
+    elif track == "dc":
+        track = 9 
+    elif track == "kc":
+        track = 10
+    elif track == "mt":
+        track = 11
+    elif track == "gv":
+        track = 12
+    elif track == "ddr":
+        track = 13
+    elif track == "mh":
+        track = 14
+    elif track == "bc":
+        track = 15
+    elif track == "rr":
+        track = 16
+    elif track == "rpb":
+        track = 17
+    elif track == "ryf":
+        track = 18
+    elif track == "rgv2":
+        track = 19
+    elif track == "rmr":
+        track = 20
+    elif track == "rsl":
+        track = 21
+    elif track == "rsgb":
+        track = 22
+    elif track == "rds":
+        track = 23
+    elif track == "rws":
+        track = 24
+    elif track == "rdh":
+        track = 25
+    elif track == "rbc3":
+        track = 26
+    elif track == "rdkjp":
+        track = 27
+    elif track == "rmc":
+        track = 28
+    elif track == "rmc3":
+        track = 29
+    elif track == "rpg":
+        track = 30
+    elif track == "rdkm":
+        track = 31
+    elif track == "rbc":
+        track = 32
+    else:
+        track = 33
+    return str(track)
     
 
-pb_total = totalizer(pb)
-sob_total = totalizer(sob)
-wr_total = totalizer(wr)
+pb_total = totalizer(pb, size)
+sob_total = totalizer(sob, size)
+wr_total = totalizer(wr, size)
 print(pb_total, sob_total, wr_total)
 current = 0
 track = 0
@@ -85,7 +156,8 @@ else:
 start = 0
 if not rand:
     start = input("start: ")
-    start = eval(start) - 2
+    start = getTrack(start)
+    start = int(start) - 2
 
 def reset():
     out = open("output.txt", "w")
@@ -108,11 +180,13 @@ while current < size:
         track = input("track: ")
         while len(track) == 0:
             track = input("track: ")
+        track = getTrack(track)
         track = int(track) - 1
         while track > size - 1 or used[track] == 1:
             track = input("track: ")
             while len(track) == 0:
                 track = input("track: ")
+            track = getTrack(track)
             track = int(track) - 1
         used[track] = 1
     else:
@@ -135,11 +209,12 @@ while current < size:
             start = input("start: ")
             while len(start) == 0:
                 start = input("start: ")
-            start = eval(start) - 2
+            start = getTrack(start)
+            start = int(start) - 2
         reset()
         continue
     
-    hwnd = win32gui.FindWindow(None, 'CaptureModule')
+    hwnd = win32gui.FindWindow('WindowsForms10.Window.8.app.0.141b42a_r9_ad1', None)
 
     left, top, right, bottom = win32gui.GetWindowRect(hwnd)
     w = right - left
@@ -167,19 +242,19 @@ while current < size:
 
     width, height = im.size 
 
-    left = 1250
-    top = 100
-    right = 1800
-    bottom = 200
+    left = 1180
+    top = 170
+    right = 1545
+    bottom = 240
 
     imf = im.crop((left, top, right, bottom))
-    im0 = im.crop((1724, 119, 1768, 173))
-    im1 = im.crop((1680, 119, 1724, 173))
-    im2 = im.crop((1638, 119, 1682, 173))
-    im3 = im.crop((1574, 119, 1618, 173))
-    im4 = im.crop((1530, 119, 1574, 173))
-    im5 = im.crop((1465, 119, 1509, 173))
-    im6 = im.crop((1421, 119, 1465, 173))
+    im0 = im.crop((1502, 183, 1533, 234))
+    im1 = im.crop((1471, 183, 1502, 234))
+    im2 = im.crop((1441, 183, 1472, 234))
+    im3 = im.crop((1396, 183, 1427, 234))
+    im4 = im.crop((1364, 183, 1395, 234))
+    im5 = im.crop((1318, 183, 1349, 234))
+    im6 = im.crop((1287, 183, 1318, 234))
 
     win32gui.DeleteObject(saveBitMap.GetHandle())
     saveDC.DeleteDC()
@@ -272,7 +347,7 @@ while current < size:
     imgFg = cv2.cvtColor(imgF, cv2.COLOR_BGR2GRAY)
     imgGg = cv2.cvtColor(imgG, cv2.COLOR_BGR2GRAY)
 
-    def parseInt(imgXg):
+    def parseInt(imgXg, m):
         x, y = 0, 0
         direc = 0
         p = list((0, 0, 0, 0, 0, 0, 0, 0, 0, 0))
@@ -282,30 +357,30 @@ while current < size:
         while go:
             seek = list((True, True, True, True, True, True, True, True, True, True))
             if it == 0:
-                x, y = 28, 29
+                x, y = 26, 21
                 direc = 0
             elif it == 1:
-                x, y = 11, 29
+                x, y = 11, 21
                 direc = 0
             elif it == 2:
-                x, y = 40, 14
+                x, y = 38, 9
                 direc = 1
             elif it == 3:
-                x, y = 24, 14
+                x, y = 23, 9
                 direc = 1
             elif it == 4:
-                x, y = 8, 14
+                x, y = 8, 9
                 direc = 1
             elif it == 5:
-                x, y = 28, 9
+                x, y = 26, 6
                 direc = 0
             elif it == 6:
-                x, y = 11, 9
+                x, y = 11, 6
                 direc = 0
             elif it == 7:
                 seek = list((True, True, False, False, False, False, False, False, False, False))
-                x, y = 11, 25
-                direc == 2
+                x, y = 13, 16
+                direc = 2
             for i in range(10):
                 p[0] = img0g[x, y]
                 p[1] = img1g[x, y]
@@ -317,6 +392,16 @@ while current < size:
                 p[7] = img7g[x, y]
                 p[8] = img8g[x, y]
                 p[9] = img9g[x, y]
+                '''img0g[x, y] = 0
+                img1g[x, y] = 0
+                img2g[x, y] = 0
+                img3g[x, y] = 0
+                img4g[x, y] = 0
+                img5g[x, y] = 0
+                img6g[x, y] = 0
+                img7g[x, y] = 0
+                img8g[x, y] = 0
+                img9g[x, y] = 0'''
                 pX = imgXg[x, y]
                 if direc == 0:
                     x = x + 1
@@ -330,29 +415,39 @@ while current < size:
                         tf[j] = tf[j] + 1
                         seek[j] = False
             it += 1
-            if it > 6:
+            if it > 7:
                 smallest = list((7, -1))
                 for i in range(10):
                     if tf[i] < smallest[0]:
                         smallest[0] = tf[i]
                         smallest[1] = i
                 if smallest != tf[0] and tf[0] != tf[1] or it > 7:
+                    if m == 1 and smallest[1] == 8:
+                        return 3
                     return smallest[1]
         return 0
 
-    i0 = parseInt(imgAg)
-    i1 = parseInt(imgBg)
-    i2 = parseInt(imgCg)
-    i3 = parseInt(imgDg)
-    i4 = parseInt(imgEg)
-    i5 = parseInt(imgFg)
-    i6 = parseInt(imgGg)
+    i0 = parseInt(imgAg, 0)
+    i1 = parseInt(imgBg, 0)
+    i2 = parseInt(imgCg, 0)
+    i3 = parseInt(imgDg, 0)
+    i4 = parseInt(imgEg, 1)
+    i5 = parseInt(imgFg, 0)
+    i6 = parseInt(imgGg, 0)
 
     time = "0:"+str(i6)+str(i5)+":"+str(i4)+str(i3)+"."+str(i2)+str(i1)+str(i0)
     print(time)
-    confirm = input("confirm: ")
+    if len(time) != 11:
+        confirm = "fail"
+    else:
+        confirm = input("confirm: ")
     if len(confirm) > 0:
-        time = input("time: ")
+        if len(confirm) == 11:
+            time = confirm
+        else:
+            time = input("time: ")
+            while len(time) != 11:
+                time = input("time: ")
         print(time)
 
     if rand:
@@ -364,7 +459,7 @@ while current < size:
         if toScore(time) < toScore(sob[track]):
             print("gold!")
             sob[track] = time
-            sob_total = totalizer(sob)
+            sob_total = totalizer(sob, size)
         print(pb[track])
     else:
         live[start] = time
@@ -375,7 +470,7 @@ while current < size:
         if toScore(time) < toScore(sob[start]):
             print("gold!")
             sob[start] = time
-            sob_total = totalizer(sob)
+            sob_total = totalizer(sob, size)
         print(pb[start])
     live_total = live_total + toScore(time)
 
@@ -420,6 +515,8 @@ while current < size:
             pb, wr = list(()), list(())
             for i in range(size):
                 pb.append(f2.readline())
+                if i == size / 2 - 1:
+                    temp1 = totalizer(pb, int(size / 2))
             f2.readline()
             for i in range(size):
                 if i > size / 2 - 1:
@@ -429,6 +526,8 @@ while current < size:
             f2.readline()
             for i in range(size):
                 wr.append(f2.readline())
+                if i == size / 2 - 1:
+                    temp2 = totalizer(wr, int(size / 2))
             for i in range(size):
                 pb[i] = pb[i][:len(pb[i])-1]
                 wr[i] = wr[i][:len(wr[i])-1]
@@ -436,14 +535,17 @@ while current < size:
                     sob[i] = sob[i][:len(sob[i])-1]
                     live.append("0:00:00.000")
                     used.append(0)
+                if i == size / 2 - 1:
+                    pb_delta = live_total - toScore(temp1)
+                    wr_delta = live_total - toScore(temp2)
             if not rand:
                 start = int(size / 2) - 1
-            pb_total = totalizer(pb)
-            sob_total = totalizer(sob)
-            wr_total = totalizer(wr)
+            pb_total = totalizer(pb, size)
+            sob_total = totalizer(sob, size)
+            wr_total = totalizer(wr, size)
             print(pb_total, sob_total, wr_total)
 
-    '''for i in range(10):
+    for i in range(10):
         cv2.imwrite("t" + str(i) + ".png", gray[i])
     cv2.imwrite("tA.png", imgAg)
     cv2.imwrite("tB.png", imgBg)
@@ -451,9 +553,9 @@ while current < size:
     cv2.imwrite("tD.png", imgDg)
     cv2.imwrite("tE.png", imgEg)
     cv2.imwrite("tF.png", imgFg)
-    cv2.imwrite("tG.png", imgGg)'''
+    cv2.imwrite("tG.png", imgGg)
 
-live_total = totalizer(live)
+live_total = totalizer(live, size)
 print(live_total)
 out2 = open("finish.txt", "w")
 out2.write(str(size))
